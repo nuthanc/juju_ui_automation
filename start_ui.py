@@ -51,7 +51,32 @@ def create_vn():
     driver.find_element_by_css_selector(CIDR).send_keys("1.0.0.0/24")
     driver.find_element_by_xpath(CREATE).click()
 
-    
+def create_instance():
+    driver.find_element_by_class_name('jws-hamburger').click()
+    menu = driver.find_element_by_xpath("//span[@class='sidebar-category workloads ant-dropdown-trigger']")
+    menu.click()
+    time.sleep(2)
+    submenu = driver.find_element_by_class_name('workloads-instances')
+    ActionChains(driver).move_to_element(menu).click(submenu).perform()
+
+    CREATE = "//span[text()='Create']"
+    driver.find_element_by_xpath(CREATE).click()
+    INSTANCE_NAME = 'input[label="Instance Name"]'
+    driver.find_element_by_css_selector(INSTANCE_NAME).send_keys("vm1")
+    IMAGE = "(//div[text()='Image']/parent::div)[2]"
+    time.sleep(5)
+    driver.find_element_by_xpath(IMAGE).click()
+    CIRROS = "//li[@title='cirros2']"
+    time.sleep(5)
+    driver.find_element_by_xpath(CIRROS).click()
+    FLAVOR = "//div[text()='Flavor']"
+    time.sleep(5)
+    driver.find_element_by_xpath(FLAVOR).click()
+    F1 = "//li[@title='f1']"
+    time.sleep(5)
+    driver.find_element_by_xpath(F1).click()
+
+
 
 if __name__ == '__main__':
     login()
